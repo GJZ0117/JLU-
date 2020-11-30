@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:600&display=swap");
+
+@-webkit-keyframes active {
+    from {
+        box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 10px 0px rgba(0, 0, 250, 0.6);
+    }
+    to {
+        box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+    }
+}
+
+@keyframes active {
+    from {
+        box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 10px 0px rgba(0, 0, 250, 0.6);
+    }
+    to {
+        box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+    }
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+
+.grid {
+    margin: 0.5vh;
+    /*display: grid;*/
+    /*grid-template-columns: 15px 15px 5px;*/
+
+    align-items: center;
+    justify-content: center;
+
+    /*grid-gap: 40px 25px;*/
+}
+
+.search-button,
+[role="search-button-role"] {
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    width: 20vw;
+    height: 5vh;
+    max-width: 180px;
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+    border-radius: 30px;
+    border: 1px solid #8F9092;
+    box-shadow: 0 2px 1.5px 0.5px #FCFCFC, 0 3px 4px #D6D7D9, 0 -2px 2px #CECFD1, 0 -3px 2px #FEFEFE, inset 0 0 1.5px 0 #CECFD1;
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 2vh;
+    font-weight: 600;
+    color: #606060;
+    text-shadow: 0 1px #fff;
+
+}
+
+.search-button::-moz-focus-inner,
+[role="search-button-role"]::-moz-focus-inner {
+    border: 0;
+}
+
+.search-button > *,
+[role="search-button-role"] > * {
+    transition: -webkit-transform 0.2s ease;
+    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+}
+
+.search-button:focus:not(:active),
+[role="search-button-role"]:focus:not(:active) {
+    -webkit-animation: active 0.9s alternate infinite;
+    animation: active 0.9s alternate infinite;
+    outline: none;
+}
+
+.search-button.icon,
+[role="search-button-role"].icon {
+    width: 6vh;
+    height: 6vh;
+}
+
+.search-button.icon svg,
+[role="search-button-role"].icon svg {
+    /*margin-top: 3px;*/
+    width: 5vh;
+    height: 5vh;
+}
+
+.download-button.icon svg {
+
+}
