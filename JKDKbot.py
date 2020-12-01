@@ -113,10 +113,12 @@ def work(username, password):
         try:
             driver.refresh()
             submit_button = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, '//a[@class="command_button_content"]'))
+                EC.presence_of_element_located((By.XPATH, '//ul[@class="commandBar"]/li[@class="command_li color0"]'))
             )
-            normal_button = driver.find_elements_by_xpath('//div[@align="center"]/div/label/font[contains(text(),"正常")]')[0]
+            normal_button = driver.find_elements_by_xpath('//input[@id="V1_CTRL28"]')[0]
             time.sleep(2)
+            js="var q=document.documentElement.scrollTop=10000"
+            driver.execute_script(js)
             normal_button.click()
             submit_button.click()
             ok_button = WebDriverWait(driver, 10).until(
@@ -124,7 +126,8 @@ def work(username, password):
             )
             ok_button.click()
             if ok_button != None: return username
-        except Exception:
+        except Exception as e:
+            print(e)
             print(str(time.asctime(time.localtime(time.time()))), "bot fail to work for", username)
     
     try:
@@ -189,13 +192,16 @@ def beginBot():
 
 def main():
 
+    repeatTimes = 0
+
     while True:
 
         # 当前时间(小时)
         localhour = time.localtime(time.time())[3]
 
         # 早上六点到九点启动打卡机器人
-        if localhour == 6 or localhour == 7 or localhour == 8:
+        if (localhour == 6 or localhour == 7 or localhour == 8) and repeatTimes < 5:
+            repeatTimes += 1
             backinfo = beginBot()
             # 全部账号完成打卡
             if backinfo == "complete":
@@ -211,9 +217,10 @@ def main():
 
         # 每天凌晨一点刷新数据库finish字段
         if localhour == 1:
+            repeatTimes = 0
             refresh_info = refreshDB()
             if refresh_info == "refresh database finish":
-                print(str(time.asctime(time.localtime(time.time()))) + "refresh database complete")
+                print(str(time.asctime(time.localtime(time.time()))) + "refresh database and repeatTimes complete")
                 time.sleep(60 * 60)
 
         # 暂停一分钟
