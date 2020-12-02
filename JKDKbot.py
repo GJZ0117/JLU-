@@ -97,17 +97,20 @@ def work(username, password):
     driver = webdriver.Firefox()
     driver.get("https://ehall.jlu.edu.cn")
 
-    username_box = driver.find_element_by_id("username")
-    password_box = driver.find_element_by_id("password")
-    login_button = driver.find_element_by_id("login-submit")
-    username_box.send_keys(username)
-    password_box.send_keys(password)
-    login_button.click()
-    time.sleep(3)
-    JKDK_button = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/ul/li[1]")
-    JKDK_button.click()
-
-    driver.switch_to.window(driver.window_handles[1])
+    try: 
+        username_box = driver.find_element_by_id("username")
+        password_box = driver.find_element_by_id("password")
+        login_button = driver.find_element_by_id("login-submit")
+        username_box.send_keys(username)
+        password_box.send_keys(password)
+        login_button.click()
+        time.sleep(3)
+        JKDK_button = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div/ul/li[1]")
+        JKDK_button.click()
+        driver.switch_to.window(driver.window_handles[1])
+    except Exception:
+        driver.quit()
+        return None
 
     def tryCommit(driver):
         try:
@@ -132,9 +135,9 @@ def work(username, password):
     
     try:
         username = tryCommit(driver)
+        driver.quit()
         return username
-    except Exception:pass
-    finally:driver.quit()
+    except Exception:driver.quit()
 
 
 # 从数据库中读数据准备打卡
